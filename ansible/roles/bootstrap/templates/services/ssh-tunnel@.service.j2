@@ -1,0 +1,14 @@
+[Unit]
+Description=Establish SSH tunnel for NAT traversal (%I)
+After=network.target
+
+[Service]
+User={{ deploy_user }}
+Group={{ deploy_group }}
+EnvironmentFile=/etc/default/ssh-tunnel@%i
+ExecStart=/usr/bin/ssh -nNT -o "ServerAliveInterval 15" -o "ServerAliveCountMax 3" -o "ExitOnForwardFailure yes" -l ${SSH_TARGET_USER} -R ${REMOTE_PORT}:${LOCAL_ADDR}:${LOCAL_PORT} -p ${SSH_TARGET_PORT} ${SSH_TARGET_ADDR}
+RestartSec=5
+Restart=always
+
+[Install]
+WantedBy=default.target

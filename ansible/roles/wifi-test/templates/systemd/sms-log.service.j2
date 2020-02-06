@@ -1,0 +1,12 @@
+[Unit]
+Description=Log all SMS sent and received
+After=network-online.target
+
+[Service]
+ExecStart=%h/bin/sms-log.sh "%h/log/sms.log"
+Restart=always
+StartLimitBurst=0
+RestartSec=0.1s
+
+[Install]
+WantedBy=default.target

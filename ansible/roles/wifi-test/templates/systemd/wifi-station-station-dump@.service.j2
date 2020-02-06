@@ -1,0 +1,10 @@
+[Unit]
+Description=Log `iw %i station dump`
+Requires=wifi-station-control-socket.service
+
+[Service]
+ExecStart=%h/bin/run-log.sh "%h/bin/wifi-station-cmd.sh \"iw %i station dump\"" %h/log/wifi-station-station-dump-%i.log
+StartLimitBurst=0
+
+[Install]
+WantedBy=default.target

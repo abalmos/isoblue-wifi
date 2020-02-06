@@ -1,0 +1,14 @@
+[Unit]
+Description="Establish SSH master control socket for wifi-station logging"
+After=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/ssh -N -M -S "%t/wifi-station/ssh-master.socket" -o ServerAliveInterval=1 -o ServerAliveCountMax=5 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@wifi-station
+Restart=always
+StartLimitBurst=0
+RuntimeDirectory="wifi-station"
+RestartSec=1s
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,66 @@
+- name: ensure mmcli is installed
+  apt:
+    name: mmcli
+    state: present
+  become: yes
+  become_user: root
+  tags: sms-test
+
+- name: ensure {{ env,user }} can run mmcli with sudo
+  template:
+    dest: /etc/sudoers.d/50-allow-mmcli
+    src: templates/sudoers.d/50-allow-mmcli.j2
+    owner: root
+    group: root
+    mode: '0440'
+  become: yes
+  become_user: root
+  tags: sms-test
+
+- name: ensure send-sms.sh is installed
+  copy:
+    src: files/bin/send-sms.sh
+    dest: ~{{ env.user }}/bin/send-sms.sh
+    owner: "{{ env.user }}"
+    group: "{{ env.group }}"
+    mode: '0750'
+  tags: sms-test
+
+- name: ensure sms-log.sh is installed
+  copy:
+    src: files/bin/sms-log.sh
+    dest: ~{{ env.user }}/bin/sms-log.sh
+    owner: "{{ env.user }}"
+    group: "{{ env.group }}"
+    mode: '0750'
+  tags: sms-test
+
+- name: ensure sms-log.service is installed
+  template:
+    src: templates/systemd/sms-log.service.j2
+    dest: ~{{ env.user }}/.config/systemd/user/sms-log.service
+    owner: "{{ env.user }}"
+    group: "{{ env.group }}"
+    mode: '0644'
+  tags: sms-test
+
+- name: ensure sms-log.service is enabled and running
+  systemd:
+    name: sms-log.service
+    daemon_reload: true
+    enabled: yes
+    scope: user
+    state: started
+  tags: sms-test
+
+- name: ensure sms-send@.service is installed
+  template:
+    src: templates/systemd/sms-send@.service.j2
+    dest: ~{{ env.user }}/.config/systemd/user/sms-send@.service
+    owner: "{{ env.user }}"
+    group: "{{ env.group }}"
+    mode: '0644'
+  tags: sms-test
+
+// TODO: enable sms-send@.service ... how to not send itself SMS ?
+

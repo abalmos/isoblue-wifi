@@ -1,0 +1,79 @@
+- name: install iperf3
+  apt:
+    name: iperf3
+    state: present
+  become: yes
+  become_user: root
+  tags: speed-test
+
+- name: ensure speed-test binary is installed
+  copy:
+    src: files/bin/speed-test
+    dest: ~{{ env.user }}/bin/speed-test
+    owner: "{{ env.user }}"
+    group: "{{ env.group }}"
+    mode: '0750'
+  tags: speed-test
+
+- name: ensure ~{{ env.user }}/log/speed-test-client/client_output directory exists
+  file:
+    path: ~{{ env.user }}/log/speed-test-client/client_output
+    state: directory
+    owner: "{{ env.user }}"
+    group: "{{ env.group }}"
+    mode: '0755'
+  tags: speed-test
+
+- name: ensure ~{{ env.user }}/log/speed-test-client/server_output directory exists
+  file:
+    path: ~{{ env.user }}/log/speed-test-client/server_output
+    state: directory
+    owner: "{{ env.user }}"
+    group: "{{ env.group }}"
+    mode: '0755'
+  tags: speed-test
+
+- name: ensure ~{{ env.user }}/log/speed-test-server/distribution directory exists
+  file:
+    path: ~{{ env.user }}/log/speed-test-server/distribution
+    state: directory
+    owner: "{{ env.user }}"
+    group: "{{ env.group }}"
+    mode: '0755'
+  tags: speed-test
+
+- name: ensure speed-test-server.service is installed
+  template:
+    src: templates/systemd/speed-test-server.service.j2
+    dest: ~{{ env.user }}/.config/systemd/user/speed-test-server.service
+    owner: "{{ env.user }}"
+    group: "{{ env.group }}"
+    mode: '0644'
+  tags: speed-test
+
+- name: ensure speed-test-server.service is enabled and running
+  systemd:
+    name: speed-test-server.service
+    daemon_reload: true
+    enabled: yes
+    scope: user
+    state: started
+  tags: speed-test
+
+- name: ensure speed-test-client.service is installed
+  template:
+    src: templates/systemd/speed-test-client.service.j2
+    dest: ~{{ env.user }}/.config/systemd/user/speed-test-client.service
+    owner: "{{ env.user }}"
+    group: "{{ env.group }}"
+    mode: '0644'
+  tags: speed-test
+
+- name: ensure speed-test-client.service is enabled and running
+  systemd:
+    name: speed-test-client.service
+    daemon_reload: true
+    enabled: yes
+    scope: user
+    state: started
+  tags: speed-test

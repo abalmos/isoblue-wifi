@@ -1,0 +1,35 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP 1x1_DC_DC_MODULE
+D Standard 1x1 isolated DC DC module
+$ENDCMP
+#
+$CMP MAX16126
+D Load-Dump/Reverse-Voltage Protection Circuits
+$ENDCMP
+#
+$CMP MIC5233
+D High Input Voltage, Low IQ μCap LDO Regulator
+F http://ww1.microchip.com/downloads/en/DeviceDoc/MIC5233-Data-Sheet-DS20006033D.pdf
+$ENDCMP
+#
+$CMP NVMFD5C668NL
+D Power, Dual N-Channel 60 V, 6.5 m, 68 A
+$ENDCMP
+#
+$CMP PDQ30-Q24-S12-D
+D Isolated Module DC DC Converter 1 Output 12V 2.5A 9V - 36V Input
+F https://www.cui.com/product/resource/digikeypdf/pdq30-d.pdf
+$ENDCMP
+#
+$CMP PDQE20-Q24-D24-D
+D Isolated Module DC DC Converter 2 Output 24V -24V 417mA, 417mA 9V - 36V Input
+F https://www.cui.com/product/resource/digikeypdf/pdqe20-d.pdf
+$ENDCMP
+#
+$CMP TLV379
+D General Purpose Amplifier 1 Circuit Rail-to-Rail SOT-23-5
+F http://www.ti.com/lit/ds/symlink/tlv379.pdf
+$ENDCMP
+#
+#End Doc Library

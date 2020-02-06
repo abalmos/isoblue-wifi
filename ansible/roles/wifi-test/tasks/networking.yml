@@ -1,0 +1,113 @@
+# TODO: Should this be factored into a "common" role?
+
+- name: ensure `linkdown` routes are skiped
+  copy:
+    src: files/sysctl.d/10-skip-linkdown-routes.conf
+    dest: /etc/sysctl.d/10-skip-linkdown-routes.conf
+    owner: root
+    group: root
+    mode: '0644'
+  notify:
+    - reload sysctl
+  become: yes
+  become_user: root
+
+- name: ensure network manager is installed
+  apt:
+    name: network-manager
+    state: present
+  become: yes
+  become_user: root
+
+- name: ensure network manager manages interfaces
+  copy:
+    src: files/network-manager/NetworkManager.conf
+    dest: /etc/NetworkManager/NetworkManager.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - reload network-manager
+  become: yes
+  become_user: root
+
+- name: ensure /etc/network/interfaces does not manage physical interfaces
+  copy:
+    src: files/network/interfaces
+    dest: /etc/network/interfaces
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - reload networking
+  become: yes
+  become_user: root
+
+- name: ensure cell connection is configured
+  template:
+    src: templates/network-manager/cell.nmconnection.j2
+    dest: /etc/NetworkManager/system-connections/cell.nmconnection
+    owner: root
+    group: root
+    mode: 0600
+  notify:
+      - reload network-manager
+  become: yes
+  become_user: root
+
+- name: ensure wifi connection is configured
+  template:
+    src: templates/network-manager/wifi-station.nmconnection.j2
+    dest: /etc/NetworkManager/system-connections/wifi-station.nmconnection
+    owner: root
+    group: root
+    mode: 0600
+  notify:
+      - reload network-manager
+  become: yes
+  become_user: root
+
+- name: ensure /etc/hosts file is updated
+  template:
+    src: templates/hosts.j2
+    dest: /etc/hosts
+    owner: root
+    group: root
+    mode: 0644
+  become: yes
+  become_user: root
+
+- name: ensure iptables-persistent is installed
+  apt:
+    name: iptables-persistent
+    state: present
+  become: yes
+  become_user: root
+
+- name: ensure iptables forwarding rules are installed
+  blockinfile:
+    path: /etc/iptables/rules.v4
+    block: "{{ lookup('template', 'iptables/wifi-station-forwarding.rules.j2') }}"
+    marker: "# {mark} ANSIBLE MANAGED BLOCK"
+    marker_begin: "BEGIN wifi-station-forwarding.rules.j2"
+    marker_end: "END wifi-station-forwarding.rules.j2"
+    create: yes
+    owner: root
+    group: root
+    mode: 0640
+  notify:
+    - reload iptables-persistent
+  become: yes
+  become_user: root
+
+- name: ensure ipv4 port forwarding is enabled
+  copy:
+    src: files/sysctl.d/10-enable-port-forwarding.conf
+    dest: /etc/sysctl.d/10-enable-port-forwarding.conf
+    owner: root
+    group: root
+    mode: '0644'
+  notify:
+    - reload sysctl
+  become: yes
+  become_user: root

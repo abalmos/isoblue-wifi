@@ -1,0 +1,49 @@
+- name: Run environment tasks
+  include_tasks:
+    file: environment.yml
+    apply:
+      tags: environment
+      become: yes
+      become_user: "{{ env.user }}"
+  tags:
+    - always
+
+- name: Run GPS and time sync tasks
+  include_tasks:
+    file: gps-time.yml
+    apply:
+      tags: gps-time
+      become: yes
+      become_user: "{{ env.user }}"
+  tags:
+    - always
+
+- name: Run networking tasks
+  include_tasks:
+    file: networking.yml
+    apply:
+      tags: networking
+      become: yes
+      become_user: "{{ env.user }}"
+  tags:
+    - always
+
+- name: Run speed test tasks
+  include_tasks:
+    file: speed-test.yml
+    apply:
+      tags: speed-test
+      become: yes
+      become_user: "{{ env.user }}"
+  tags:
+    - always
+
+- name: Run logging tasks
+  include_tasks:
+    file: logging.yml
+    apply:
+      tags: logging
+      become: yes
+      become_user: "{{ env.user }}"
+  tags:
+    - always

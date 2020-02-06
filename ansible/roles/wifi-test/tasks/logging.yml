@@ -1,0 +1,331 @@
+- name: ensure journald storage is persistent to support user log spliting
+  lineinfile:
+    path: /etc/systemd/journald.conf
+    regex: '^\s*#?\s*Storage\s*=\s*persistent\s*$'
+    line: Storage=persistent
+    state: present
+  become: yes
+  become_user: root
+  notify: restart journald
+  tags: journald
+
+- name: ensure ~{{ env.user}}/log/gps log directory exists
+  file:
+    path: ~{{ env.user }}/log/gps
+    state: directory
+    owner: "{{ env.user }}"
+    group: "{{ env.group }}"
+    mode: '0755'
+  tags: gps-log
+
+- name: ensure gpsd-clients is installed for gpspipe
+  apt:
+    name: gpsd-clients
+    state: present
+  become: yes
+  become_user: root
+  tags: gps-log
+
+- name: ensure gpspipe-log.service is installed
+  template:
+    src: templates/systemd/gpspipe-log.service.j2
+    dest: ~{{ env.user }}/.config/systemd/user/gpspipe-log.service
+    owner: "{{ env.user }}"
+    group: "{{ env.group }}"
+    mode: '0644'
+  tags: gps-log
+
+- name: ensure gpspipe-log.service is enabled and running
+  systemd:
+    name: gpspipe-log.service
+    daemon_reload: true
+    enabled: yes
+    scope: user
+    state: started
+  tags: gps-log
+
+- name: ensure mosquitto-clients is installed for gps MQTT stream
+  apt:
+    name: mosquitto-clients
+    state: present
+  become: yes
+  become_user: root
+  tags: gps-mqtt
+
+- name: ensure gps-mqtt.sh is installed
+  copy:
+    src: files/bin/gps-mqtt.sh
+    dest: ~{{ env.user }}/bin/gps-mqtt.sh
+    owner: "{{ env.user }}"
+    group: "{{ env.group }}"
+    mode: '0760'
+  tags: gps-mqtt
+
+- name: ensure gps-mqtt.service is installed
+  template:
+    src: templates/systemd/gps-mqtt.service.j2
+    dest: ~{{ env.user }}/.config/systemd/user/gps-mqtt.service
+    owner: "{{ env.user }}"
+    group: "{{ env.group }}"
+    mode: '0644'
+  tags: gps-mqtt
+
+- name: ensure gps-mqtt.service is enabled and running
+  systemd:
+    name: gps-mqtt.service
+    daemon_reload: true
+    enabled: yes
+    scope: user
+    state: started
+  tags: gps-mqtt
+
+- name: ensure ping-log.service is installed
+  template:
+    src: templates/systemd/ping-log.service.j2
+    dest: ~{{ env.user }}/.config/systemd/user/ping-log.service
+    owner: "{{ env.user }}"
+    group: "{{ env.group }}"
+    mode: '0644'
+  tags: ping-log
+
+- name: ensure ping-log.service is enabled and running
+  systemd:
+    name: ping-log.service
+    daemon_reload: true
+    enabled: yes
+    scope: user
+    state: started
+  tags: ping-log
+
+- name: ensure jq is installed
+  apt:
+    name: jq
+    state: present
+  become: yes
+  become_user: root
+  tags: log-bin
+
+- name: ensure run-log.sh is installed
+  copy:
+    src: files/bin/run-log.sh
+    dest: ~{{ env.user }}/bin/run-log.sh
+    owner: "{{ env.user }}"
+    group: "{{ env.group }}"
+    mode: '0760'
+  tags: log-bin
+
+- name: ensure wifi-station-cmd.sh is installed
+  template:
+    src: files/bin/wifi-station-cmd.sh
+    dest: ~{{ env.user }}/bin/wifi-station-cmd.sh
+    owner: "{{ env.user }}"
+    group: "{{ env.group }}"
+    mode: '0760'
+  tags: log-bin
+
+- name: ensure mmcli-log.service is installed
+  template:
+    src: templates/systemd/mmcli-log.service.j2
+    dest: ~{{ env.user }}/.config/systemd/user/mmcli-log.service
+    owner: "{{ env.user }}"
+    group: "{{ env.group }}"
+    mode: '0644'
+  tags: mmcli-log
+
+- name: ensure mmcli-log.timer is installed
+  template:
+    src: templates/systemd/mmcli-log.timer.j2
+    dest: ~{{ env.user }}/.config/systemd/user/mmcli-log.timer
+    owner: "{{ env.user }}"
+    group: "{{ env.group }}"
+    mode: '0644'
+  tags: mmcli-log
+
+- name: ensure mmcli-log.timer is enabled and running
+  systemd:
+    name: mmcli-log.timer
+    daemon_reload: true
+    enabled: yes
+    scope: user
+    state: started
+  tags: mmcli-log
+
+- name: ensure wifi-station-control-socket.service is installed
+  template:
+    src: templates/systemd/wifi-station-control-socket.service.j2
+    dest: ~{{ env.user }}/.config/systemd/user/wifi-station-control-socket.service
+    owner: "{{ env.user }}"
+    group: "{{ env.group }}"
+    mode: '0644'
+  tags: control-socket
+
+- name: ensure wifi-station-control-socket.service is enabled and running
+  systemd:
+    name: wifi-station-control-socket.service
+    daemon_reload: true
+    enabled: yes
+    scope: user
+    state: started
+  tags: control-socket
+
+- name: ensure wifi-station-station-dump@.service is installed
+  template:
+    src: templates/systemd/wifi-station-station-dump@.service.j2
+    dest: ~{{ env.user }}/.config/systemd/user/wifi-station-station-dump@.service
+    owner: "{{ env.user }}"
+    group: "{{ env.group }}"
+    mode: '0644'
+  tags: station-dump-log
+
+- name: ensure wifi-station-station-dump@.timer is installed
+  template:
+    src: templates/systemd/wifi-station-station-dump@.timer.j2
+    dest: ~{{ env.user }}/.config/systemd/user/wifi-station-station-dump@.timer
+    owner: "{{ env.user }}"
+    group: "{{ env.group }}"
+    mode: '0644'
+  tags: station-dump-log
+
+- name: ensure wifi-station-station-dump@wlan0.timer is enabled and running
+  systemd:
+    name: wifi-station-station-dump@wlan0.timer
+    daemon_reload: true
+    enabled: yes
+    scope: user
+    state: started
+  tags: station-dump-log
+
+- name: ensure wifi-station-station-dump@wlan1.timer is enabled and running
+  systemd:
+    name: wifi-station-station-dump@wlan1.timer
+    daemon_reload: true
+    enabled: yes
+    scope: user
+    state: started
+  tags: station-dump-log
+
+- name: ensure wifi-station-info-log@.service is installed
+  template:
+    src: templates/systemd/wifi-station-info-log@.service.j2
+    dest: ~{{ env.user }}/.config/systemd/user/wifi-station-info-log@.service
+    owner: "{{ env.user }}"
+    group: "{{ env.group }}"
+    mode: '0644'
+  tags: info-log
+
+- name: ensure wifi-station-info-log@.timer is installed
+  template:
+    src: templates/systemd/wifi-station-info-log@.timer.j2
+    dest: ~{{ env.user }}/.config/systemd/user/wifi-station-info-log@.timer
+    owner: "{{ env.user }}"
+    group: "{{ env.group }}"
+    mode: '0644'
+  tags: info-log
+
+- name: ensure wifi-station-info-log@phy0.timer is enabled and running
+  systemd:
+    name: wifi-station-info-log@phy0.timer
+    daemon_reload: true
+    enabled: yes
+    scope: user
+    state: started
+  tags: info-log
+
+- name: ensure wifi-station-info-log@phy1.timer is enabled and running
+  systemd:
+    name: wifi-station-info-log@phy1.timer
+    daemon_reload: true
+    enabled: yes
+    scope: user
+    state: started
+  tags: info-log
+
+- name: ensure wifi-station-info-log@wlan0.timer is enabled and running
+  systemd:
+    name: wifi-station-info-log@wlan0.timer
+    daemon_reload: true
+    enabled: yes
+    scope: user
+    state: started
+  tags: info-log
+
+- name: ensure wifi-station-info-log@wlan1.timer is enabled and running
+  systemd:
+    name: wifi-station-info-log@wlan1.timer
+    daemon_reload: true
+    enabled: yes
+    scope: user
+    state: started
+  tags: info-log
+
+- name: ensure wifi-station-mpath-log@.service is installed
+  template:
+    src: templates/systemd/wifi-station-mpath-log@.service.j2
+    dest: ~{{ env.user }}/.config/systemd/user/wifi-station-mpath-log@.service
+    owner: "{{ env.user }}"
+    group: "{{ env.group }}"
+    mode: '0644'
+  tags: mpath-log
+
+- name: ensure wifi-station-mpath-log@.timer is installed
+  template:
+    src: templates/systemd/wifi-station-mpath-log@.timer.j2
+    dest: ~{{ env.user }}/.config/systemd/user/wifi-station-mpath-log@.timer
+    owner: "{{ env.user }}"
+    group: "{{ env.group }}"
+    mode: '0644'
+  tags: mpath-log
+
+- name: ensure wifi-station-mpath-log@wlan0.timer is enabled and running
+  systemd:
+    name: wifi-station-mpath-log@wlan0.timer
+    daemon_reload: true
+    enabled: yes
+    scope: user
+    state: started
+  tags: mpath-log
+
+- name: ensure wifi-station-mpath-log@wlan1.timer is enabled and running
+  systemd:
+    name: wifi-station-mpath-log@wlan1.timer
+    daemon_reload: true
+    enabled: yes
+    scope: user
+    state: started
+  tags: mpath-log
+
+- name: ensure wifi-station-scan-log@.service is installed
+  template:
+    src: templates/systemd/wifi-station-scan-log@.service.j2
+    dest: ~{{ env.user }}/.config/systemd/user/wifi-station-scan-log@.service
+    owner: "{{ env.user }}"
+    group: "{{ env.group }}"
+    mode: '0644'
+  tags: scan-log
+
+- name: ensure wifi-station-scan-log@.timer is installed
+  template:
+    src: templates/systemd/wifi-station-scan-log@.timer.j2
+    dest: ~{{ env.user }}/.config/systemd/user/wifi-station-scan-log@.timer
+    owner: "{{ env.user }}"
+    group: "{{ env.group }}"
+    mode: '0644'
+  tags: scan-log
+
+- name: ensure wifi-station-scan-log@wlan0.timer is enabled and running
+  systemd:
+    name: wifi-station-scan-log@wlan0.timer
+    daemon_reload: true
+    enabled: yes
+    scope: user
+    state: started
+  tags: scan-log
+
+- name: ensure wifi-station-scan-log@wlan1.timer is enabled and running
+  systemd:
+    name: wifi-station-scan-log@wlan1.timer
+    daemon_reload: true
+    enabled: yes
+    scope: user
+    state: started
+  tags: scan-log

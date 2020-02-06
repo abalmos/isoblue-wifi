@@ -1,0 +1,13 @@
+[Unit]
+Description=WiFi speed test server
+After=networking-online.target
+
+[Service]
+WorkingDirectory=%h/log/speed-test-server
+ExecStart=%h/bin/speed-test --server
+StartLimitBurst=0
+Restart=always
+RestartSec=1s
+
+[Install]
+WantedBy=default.target

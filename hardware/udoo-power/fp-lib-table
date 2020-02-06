@@ -1,0 +1,4 @@
+(fp_lib_table
+  (lib (name "logos")(type "KiCad")(uri "${KIPRJMOD}/logos.pretty")(options "")(descr ""))
+  (lib (name "isoblue3")(type "KiCad")(uri "${KIPRJMOD}/isoblue3.pretty")(options "")(descr ""))
+)

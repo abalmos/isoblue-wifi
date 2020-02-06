@@ -1,0 +1,6 @@
+SSH_TARGET_ADDR={{ bastion_addr }}
+SSH_TARGET_PORT={{ bastion_port }}
+SSH_TARGET_USER={{ bastion_user }}
+REMOTE_PORT={{ (bastion_forward_port_base+nid)|int }}
+LOCAL_ADDR=localhost
+LOCAL_PORT=22

@@ -1,0 +1,4 @@
+(sym_lib_table
+  (lib (name "logos")(type "Legacy")(uri "${KIPRJMOD}/logos.lib")(options "")(descr ""))
+  (lib (name "isoblue3")(type "Legacy")(uri "${KIPRJMOD}/isoblue3.lib")(options "")(descr ""))
+)

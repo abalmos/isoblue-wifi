@@ -1,0 +1,10 @@
+[Unit]
+Description=Run `iw %i mpath dump` periodically
+Requires=wifi-station-control-socket.service
+
+[Service]
+ExecStart=%h/bin/run-log.sh "%h/bin/wifi-station-cmd.sh \"iw %i mpath dump\"" %h/log/wifi-station-mpath-%i.log
+StartLimitBurst=0
+
+[Install]
+WantedBy=default.target

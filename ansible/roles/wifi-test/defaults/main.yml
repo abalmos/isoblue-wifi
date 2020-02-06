@@ -1,0 +1,28 @@
+env:
+  user: 'wifi-test'
+  group: 'wifi-test'
+  bin: ~wifi-test/bin
+  log: ~wifi-test/log
+
+log:
+  rate:
+    fast: '1s'
+    slow: '1h'
+
+gps:
+  device: 'gps0'
+
+cell:
+  device: 'cdc-wdm0'
+  interface: 'wwp0s20u2i2'
+  nameservers: '1.1.1.1;1.0.0.1;'
+
+wifi_station:
+  address: "{{ '192.168.1.0/16' | ipmath(nid) }}/16"
+  eth_interface: 'enp2s0'
+  eth_device: 'enp2s0'
+  eth_address: "{{ '192.168.0.0/16' | ipmath(nid) }}/16"
+  nameservers: '1.1.1.1;1.0.0.1;'
+
+speed_test:
+  server: '192.168.0.1:5555'

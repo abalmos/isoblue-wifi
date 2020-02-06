@@ -1,0 +1,9 @@
+- name: restart sshd
+  systemd:
+    name: sshd
+    state: restarted
+  become: yes
+
+- name: rebuild grub
+  command: /usr/sbin/update-grub
+  become: yes

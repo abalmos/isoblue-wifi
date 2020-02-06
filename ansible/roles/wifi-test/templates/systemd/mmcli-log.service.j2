@@ -1,0 +1,9 @@
+[Unit]
+Description=Log `mmcli -m 0`
+
+[Service]
+ExecStart=%h/bin/run-log.sh "mmcli -m $(mmcli -L | sed -En 's#\s+/org/freedesktop/ModemManager1/Modem/([[:digit:]]+).*#\1#p')" %h/log/mmcli.log
+StartLimitBurst=0
+
+[Install]
+WantedBy=default.target

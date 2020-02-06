@@ -1,0 +1,12 @@
+[Unit]
+Description=Run `iw %i info` periodically
+Requires=wifi-station-info-log@%i.service
+
+[Timer]
+Unit=wifi-station-info-log@%i.service
+OnActiveSec=0s
+OnUnitActiveSec={{ log.rate.fast }}
+AccuracySec=1s
+
+[Install]
+WantedBy=default.target

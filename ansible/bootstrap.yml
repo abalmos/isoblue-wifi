@@ -1,0 +1,5 @@
+- name: Bootstrap device for Ansible deploy + management
+  hosts: bootstrap
+  remote_user: "{{ deploy_user }}"
+  roles:
+    - bootstrap

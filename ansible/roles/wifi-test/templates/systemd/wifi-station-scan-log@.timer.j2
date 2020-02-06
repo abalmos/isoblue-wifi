@@ -1,0 +1,13 @@
+[Unit]
+Description=Run `iw %i scan dump` periodically
+Requires=wifi-station-scan-log@%i.service
+
+[Timer]
+Unit=wifi-station-scan-log@%i.service
+OnActiveSec=0s
+OnUnitActiveSec={{ log.rate.slow }}
+RandomizedDelaySec={{ log.rate.slow }}
+AccuracySec=1s
+
+[Install]
+WantedBy=default.target

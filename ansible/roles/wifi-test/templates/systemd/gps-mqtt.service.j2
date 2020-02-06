@@ -1,0 +1,13 @@
+[Unit]
+Description=Log gps to MQTT for real-timer viewer
+After=gpsd.service
+
+[Service]
+ExecStart=%h/bin/gps-mqtt.sh
+StartLimitBurst=0
+Restart=always
+RestartSec=1s
+RuntimeMaxSec=120s
+
+[Install]
+WantedBy=default.target

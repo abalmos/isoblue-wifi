@@ -1,0 +1,54 @@
+- name: reload sysctl
+  command: 'sysctl -p /etc/sysctl.d/*.conf'
+  become: yes
+  become_user: root
+
+- name: restart apparmor
+  systemd:
+    name: apparmor
+    state: restarted
+  become: yes
+  become_user: root
+
+- name: restart chrony
+  systemd:
+    name: chrony
+    state: restarted
+  become: yes
+  become_user: root
+  notify: restart gpsd
+
+- name: restart gpsd
+  systemd:
+    name: gpsd
+    state: restarted
+  become: yes
+  become_user: root
+
+- name: reload network-manager
+  systemd:
+    name: NetworkManager
+    state: reloaded
+  become: yes
+  become_user: root
+
+- name: restart networking
+  systemd:
+    name: networking
+    state: restarted
+  become: yes
+  become_user: root
+
+- name: reload iptables-persistent
+  systemd:
+    name: netfilter-persistent
+    state: reloaded
+  become: yes
+  become_user: root
+
+- name: restart journald
+  systemd:
+    name: systemd-journald
+    state: restarted
+  become: yes
+  become_user: root

@@ -1,0 +1,23 @@
+[connection]
+id=wifi-station
+uuid=a9158145-f7de-48ab-a1fb-992f29c71710
+type=ethernet
+autoconnect-retries=0
+interface-name={{ wifi_station.eth_device }}
+permissions=
+
+[ethernet]
+mac-address-blacklist=
+
+[ipv4]
+address1={{ wifi_station.eth_address }}
+dns={{ wifi_station.nameservers }}
+dns-search=
+ignore-auto-dns=true
+method=manual
+route-metric=100
+
+[ipv6]
+addr-gen-mode=stable-privacy
+dns-search=
+method=auto

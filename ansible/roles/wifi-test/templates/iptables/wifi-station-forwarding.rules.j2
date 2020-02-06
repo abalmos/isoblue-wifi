@@ -1,0 +1,16 @@
+*filter
+:INPUT ACCEPT [0:0]
+:FORWARD ACCEPT [0:0]
+:OUTPUT ACCEPT [0:0]
+-A FORWARD -i {{ cell.interface }} -o {{ wifi_station.eth_interface }} -m state --state RELATED,ESTABLISHED -j ACCEPT
+-A FORWARD -i {{ wifi_station.eth_interface }} -o {{ cell.interface }} -j ACCEPT
+COMMIT
+
+*nat
+:PREROUTING ACCEPT [0:0]
+:INPUT ACCEPT [0:0]
+:POSTROUTING ACCEPT [0:0]
+:OUTPUT ACCEPT [0:0]
+-A POSTROUTING -o {{ cell.interface }} -j MASQUERADE
+COMMIT
+

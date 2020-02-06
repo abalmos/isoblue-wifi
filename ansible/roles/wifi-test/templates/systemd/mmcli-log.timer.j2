@@ -1,0 +1,12 @@
+[Unit]
+Description=Run `mmcli -m *` periodically
+Requires=mmcli-log.service
+
+[Timer]
+Unit=mmcli-log.service
+OnActiveSec=0s
+OnUnitActiveSec=1s
+AccuracySec=0.5s
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,12 @@
+[Unit]
+Description=Run `iw %i station dump` periodically
+Requires=wifi-station-station-dump@%i.service
+
+[Timer]
+Unit=wifi-station-station-dump@%i.service
+OnActiveSec=0s
+OnUnitActiveSec={{ log.rate.fast }}
+AccuracySec=1s
+
+[Install]
+WantedBy=default.target

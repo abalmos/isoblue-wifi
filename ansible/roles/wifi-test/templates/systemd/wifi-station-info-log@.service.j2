@@ -1,0 +1,10 @@
+[Unit]
+Description=Run `iw %i info` periodically
+Requires=wifi-station-control-socket.service
+
+[Service]
+ExecStart=%h/bin/run-log.sh "%h/bin/wifi-station-cmd.sh \"iw %i info\"" %h/log/wifi-station-info-%i.log
+StartLimitBurst=0
+
+[Install]
+WantedBy=default.target

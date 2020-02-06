@@ -1,0 +1,5 @@
+deploy_user: deploy
+deploy_group: deploy
+
+bastion_forward_port_base: 2200
+ansible_port: "{{ (bastion_forward_port_base+nid)|int }}"

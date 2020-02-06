@@ -1,0 +1,74 @@
+# TODO: Should be part of bootstrap? Needed to get around Ansible permission
+# issues when working as unprivileged user.
+- name: ensure {{ env.group }} group exists
+  group:
+    name: "{{ env.group }}"
+    state: present
+  become: yes
+  become_user: root
+  tags:
+    - user
+
+- name: ensure {{ env.user }} user exists
+  user:
+    name: "{{ env.user }}"
+    group: "{{ env.group }}"
+    comment: "User for running `wifi-test` processes"
+    shell: /bin/bash
+    state: present
+  register: env.user_reg
+  become: yes
+  become_user: root
+  tags:
+    - user
+
+- name: install acl
+  apt:
+    name: acl
+    state: present
+  become: yes
+  become_user: root
+  tags: acl
+
+- name: ensure ~{{ env.user }}/bin directory exists
+  file:
+    path: ~{{ env.user }}/bin
+    state: directory
+    owner: "{{ env.user }}"
+    group: "{{ env.group }}"
+    mode: '0755'
+  tags: user
+
+- name: ensure ~{{ env.user }}/log directory exists
+  file:
+    path: ~{{ env.user }}/log
+    state: directory
+    owner: "{{ env.user }}"
+    group: "{{ env.group }}"
+    mode: '0755'
+  tags: user
+
+- name: ensure ~{{ env.user }}/.config/systemd/user directory exists
+  file:
+    path: ~{{ env.user }}/.config/systemd/user
+    state: directory
+    owner: "{{ env.user }}"
+    group: "{{ env.group }}"
+    mode: '0755'
+  tags: user
+
+- name: ensure {{ env.user }} systemd session is linger
+  command: "loginctl enable-linger {{ env.user }}"
+  args:
+    creates: "/var/lib/systemd/linger/{{ env.user }}"
+  become: yes
+  become_user: root
+  tags: user
+
+- name: ensure {{ env.user }} has XDG_RUNTIME_DIR set
+  lineinfile:
+    path: ~/.bashrc
+    regex: '^\s*#*\s*export\s+XDG_RUNTIME_DIR=.*$'
+    line: export XDG_RUNTIME_DIR="/run/user/$(id -u)"
+    state: present
+  tags: user

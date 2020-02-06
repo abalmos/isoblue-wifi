@@ -1,0 +1,6 @@
+- name: Deploy a device into a wifi-test fleet
+  hosts: wifi_test
+  gather_facts: no
+  remote_user: "{{ deploy_user }}"
+  roles:
+    - wifi-test

@@ -1,0 +1,12 @@
+[Unit]
+Description=Run send-sms@%i periodically
+Requires=send-sms@%i.service
+
+[Timer]
+Unit=send-sms@%i.service
+OnActiveSec=0s
+OnUnitActiveSec=1s
+AccuracySec=1s
+
+[Install]
+WantedBy=default.target

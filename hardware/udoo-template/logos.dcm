@@ -1,0 +1,19 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP KICAD_LOGO
+D Made with KiCAD logo
+$ENDCMP
+#
+$CMP OATS_LOGO
+D OATS group logo
+$ENDCMP
+#
+$CMP PURDUE_LOGO
+D Purdue university logo
+$ENDCMP
+#
+$CMP WHIN_LOGO
+D WHIN logo
+$ENDCMP
+#
+#End Doc Library

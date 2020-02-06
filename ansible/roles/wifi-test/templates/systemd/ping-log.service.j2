@@ -1,0 +1,12 @@
+[Unit]
+Description=Ping centeral server to test Internet connectivity
+After=network-online.target
+
+[Service]
+ExecStart=%h/bin/run-log.sh "ping {{ connectivity_check_server }} -D -v -c 10" %h/log/ping.log
+Restart=always
+StartLimitBurst=0
+RestartSec=0.1s
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,80 @@
+# TODO: Should this be factored into a "common" role?
+
+# chrony `Conflicts` with systemd-timesyncd ... but just to be sure.
+- name: disable systemd-timesyncd
+  systemd:
+    name: systemd-timesyncd
+    state: stopped
+    enabled: no
+  become: yes
+  become_user: root
+
+- name: install chrony
+  apt:
+    name: chrony
+    state: present
+  become: yes
+  become_user: root
+
+- name: ensure chrony is properly configured
+  template:
+    dest: /etc/chrony/chrony.conf
+    src: templates/chrony/chrony.conf.j2
+    owner: root
+    group: root
+    mode: '0644'
+  become: yes
+  become_user: root
+  notify: restart chrony
+
+- name: ensure chrony apparmor rules allow /run/chrony.gps0.sock RW
+  copy:
+    dest: /etc/apparmor.d/local/
+    src: files/apparmor.d/usr.sbin.chronyd
+    owner: root
+    group: root
+    mode: '0644'
+  become: yes
+  become_user: root
+  notify: restart apparmor
+
+- name: ensure chrony is enabled
+  systemd:
+    name: chrony
+    enabled: yes
+
+- name: ensure GPSs with PL2303 are identified as a GPS
+  copy:
+    dest: /etc/udev/rules.d/
+    src: files/udev/60-extended-gpsd.rules
+    owner: root
+    group: root
+    mode: '0644'
+  become: yes
+  become_user: root
+
+- name: install gpsd
+  apt:
+    name: gpsd
+    state: present
+  become: yes
+  become_user: root
+
+- name: ensure gpsd is properly configured
+  template:
+    dest: /etc/default/gpsd
+    src: templates/default/gpsd.j2
+    owner: root
+    group: root
+    mode: '0644'
+  become: yes
+  become_user: root
+  notify: restart gpsd
+
+- name: ensure gpsd is enabled
+  systemd:
+    name: chrony
+    enabled: yes
+  become: yes
+  become_user: root
+  notify: restart gpsd

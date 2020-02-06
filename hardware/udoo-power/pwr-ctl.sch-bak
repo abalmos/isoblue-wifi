@@ -1,0 +1,701 @@
+EESchema Schematic File Version 5
+LIBS:udoo-power-cache
+EELAYER 30 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 3 4
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+Comment5 ""
+Comment6 ""
+Comment7 ""
+Comment8 ""
+Comment9 ""
+$EndDescr
+Connection ~ 1700 2800
+Wire Wire Line
+	1650 2300 1650 2400
+Wire Wire Line
+	1700 3200 1800 3200
+Wire Wire Line
+	1700 2800 1800 2800
+Text Notes 725  1975 0    75   ~ 15
+SW Debug (Tag Connect)
+Wire Wire Line
+	1800 2500 1600 2500
+Wire Wire Line
+	1650 2400 1800 2400
+Text HLabel 1650 2300 1    50   Input ~ 0
+1V8
+Wire Wire Line
+	1600 2700 1800 2700
+Wire Wire Line
+	1700 2600 1700 2800
+Text Label 1600 3300 2    50   ~ 0
+NRST
+Text Label 1600 2700 2    50   ~ 0
+SWCLK
+Wire Wire Line
+	1800 3300 1600 3300
+Wire Wire Line
+	1800 2600 1700 2600
+Text Label 1600 2500 2    50   ~ 0
+SWDIO
+Wire Wire Line
+	1700 2800 1700 2875
+$Comp
+L power:GND #PWR016
+U 1 1 5E0456EC
+P 1525 2900
+F 0 "#PWR016" H 1525 2650 50  0001 C CNN
+F 1 "GND" H 1530 2727 50  0000 C CNN
+F 2 "" H 1525 2900 50  0001 C CNN
+F 3 "" H 1525 2900 50  0001 C CNN
+	1    1525 2900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1525 2900 1525 2875
+Wire Wire Line
+	1525 2875 1700 2875
+Connection ~ 1700 2875
+Wire Wire Line
+	1700 2875 1700 3200
+Connection ~ 5600 2850
+Wire Wire Line
+	5750 2650 5600 2650
+Wire Wire Line
+	6150 2650 6150 2500
+Connection ~ 6600 2850
+Connection ~ 6150 2850
+Wire Wire Line
+	6050 2850 5950 2850
+Wire Wire Line
+	6150 2850 6150 3350
+Wire Wire Line
+	6050 4850 6050 4900
+Wire Wire Line
+	5600 2850 5750 2850
+Wire Wire Line
+	6550 4650 6750 4650
+Text HLabel 6750 4450 2    50   3State ~ 0
+CTRL_SDA
+Wire Wire Line
+	6050 2650 6050 2500
+Connection ~ 6100 2500
+Wire Wire Line
+	5600 2950 5600 2850
+Wire Wire Line
+	6450 2650 6600 2650
+Connection ~ 6050 2650
+Text HLabel 6100 2350 1    50   Input ~ 0
+1V8
+Wire Wire Line
+	6250 2650 6150 2650
+Wire Wire Line
+	6250 2850 6150 2850
+Text Notes 4625 2875 0    75   ~ 15
+Controller
+Wire Wire Line
+	6600 2850 6600 2950
+Wire Wire Line
+	5650 4250 5550 4250
+Wire Wire Line
+	6600 2650 6600 2850
+Connection ~ 6150 2650
+Text Label 6750 4550 0    50   ~ 0
+SWDIO
+Wire Wire Line
+	6050 2850 6050 3350
+Text Label 6750 4650 0    50   ~ 0
+SWCLK
+Wire Wire Line
+	6450 2850 6600 2850
+Wire Wire Line
+	5600 2650 5600 2850
+Connection ~ 6050 2850
+$Comp
+L power:GND #PWR021
+U 1 1 5E056FAE
+P 6600 2950
+F 0 "#PWR021" H 6600 2700 50  0001 C CNN
+F 1 "GND" H 6605 2777 50  0000 C CNN
+F 2 "" H 6600 2950 50  0001 C CNN
+F 3 "" H 6600 2950 50  0001 C CNN
+	1    6600 2950
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR020
+U 1 1 5E053370
+P 6050 4900
+F 0 "#PWR020" H 6050 4650 50  0001 C CNN
+F 1 "GND" H 6055 4727 50  0000 C CNN
+F 2 "" H 6050 4900 50  0001 C CNN
+F 3 "" H 6050 4900 50  0001 C CNN
+	1    6050 4900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6050 2850 6050 2650
+Wire Wire Line
+	6100 2350 6100 2500
+Wire Wire Line
+	6050 2500 6100 2500
+Wire Wire Line
+	6550 4550 6750 4550
+Wire Wire Line
+	6150 2850 6150 2650
+Wire Wire Line
+	6050 2650 5950 2650
+Wire Wire Line
+	6750 4450 6550 4450
+Wire Wire Line
+	6150 2500 6100 2500
+$Comp
+L power:GND #PWR019
+U 1 1 5E05A47E
+P 5600 2950
+F 0 "#PWR019" H 5600 2700 50  0001 C CNN
+F 1 "GND" H 5605 2777 50  0000 C CNN
+F 2 "" H 5600 2950 50  0001 C CNN
+F 3 "" H 5600 2950 50  0001 C CNN
+	1    5600 2950
+	1    0    0    -1  
+$EndComp
+Text HLabel 6750 3550 2    50   Input ~ 0
+U_RUN
+Wire Wire Line
+	6750 3550 6550 3550
+Text HLabel 6750 4250 2    50   Output ~ 0
+INT
+Wire Wire Line
+	6750 4250 6550 4250
+Text Notes 0    0    0    50   ~ 0
+TLV379
+Text HLabel 6750 3950 2    50   3State ~ 0
+CTRL_SCL
+Wire Wire Line
+	6550 3950 6750 3950
+Wire Wire Line
+	7350 3650 7200 3650
+Text HLabel 7350 3650 2    50   3State ~ 0
+R_FLAG
+Wire Wire Line
+	7200 3550 7200 3650
+Connection ~ 7200 3650
+Wire Wire Line
+	7200 3650 6550 3650
+Text HLabel 7200 3250 1    50   Input ~ 0
+1V8
+Wire Wire Line
+	7200 3250 7200 3350
+Text Notes 8150 1600 0    75   ~ 15
+Status
+Wire Wire Line
+	5325 3600 5325 3550
+Text Notes 4675 3300 2    50   ~ 0
+Reset
+$Comp
+L power:GND #PWR018
+U 1 1 5E04E36B
+P 4700 3700
+F 0 "#PWR018" H 4700 3450 50  0001 C CNN
+F 1 "GND" H 4705 3527 50  0000 C CNN
+F 2 "" H 4700 3700 50  0001 C CNN
+F 3 "" H 4700 3700 50  0001 C CNN
+	1    4700 3700
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4900 3600 4700 3600
+Wire Wire Line
+	5100 3600 5325 3600
+Wire Wire Line
+	4700 3600 4700 3700
+Wire Wire Line
+	5200 3400 5325 3400
+Wire Wire Line
+	5650 3550 5325 3550
+Connection ~ 5325 3550
+Wire Wire Line
+	5325 3550 5325 3400
+NoConn ~ 6550 4350
+NoConn ~ 6550 3750
+NoConn ~ 6550 3850
+Wire Wire Line
+	6550 4050 8100 4050
+Wire Wire Line
+	8575 2100 8575 2000
+Wire Wire Line
+	8575 2400 8575 2300
+$Comp
+L power:GND #PWR023
+U 1 1 5D720512
+P 8575 2400
+F 0 "#PWR023" H 8575 2150 50  0001 C CNN
+F 1 "GND" H 8580 2227 50  0000 C CNN
+F 2 "" H 8575 2400 50  0001 C CNN
+F 3 "" H 8575 2400 50  0001 C CNN
+	1    8575 2400
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8100 4050 8100 1675
+Wire Wire Line
+	8100 1675 8575 1675
+Wire Wire Line
+	8575 1675 8575 1800
+$Comp
+L Device:R_Small_US R17
+U 1 1 5DA12005
+P 8575 2200
+F 0 "R17" H 8507 2109 50  0000 R CNN
+F 1 "20" H 8507 2200 50  0000 R CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 8575 2200 50  0001 C CNN
+F 3 "https://www.rohm.com/datasheet/ESR01MZPF/esr-e" H 8575 2200 50  0001 C CNN
+F 4 "ESR03EZPJ200" V 8575 2200 50  0001 C CNN "PartNum"
+F 5 "RHM20DCT-ND" V 8575 2200 50  0001 C CNN "DigiKey"
+F 6 "" V 8575 2200 50  0001 C CNN "Sub?"
+	1    8575 2200
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:LED_Small_ALT D7
+U 1 1 5DA12004
+P 8575 1900
+F 0 "D7" V 8666 1998 50  0000 L CNN
+F 1 "PC_STATUS" V 8575 1998 50  0000 L CNN
+F 2 "LED_SMD:LED_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 8575 1900 50  0001 C CNN
+F 3 "https://katalog.we-online.de/led/datasheet/150080RS75000.pdf" V 8575 1900 50  0001 C CNN
+F 4 "red" V 8484 1998 50  0000 L CNN "Color"
+F 5 "150080RS75000" V 8575 1900 50  0001 C CNN "PartNum"
+F 6 "732-4984-1-ND" V 8575 1900 50  0001 C CNN "DigiKey"
+F 7 "" V 8575 1900 50  0001 C CNN "Sub?"
+	1    8575 1900
+	0    1    -1   0   
+$EndComp
+$Comp
+L Device:C_Small C4
+U 1 1 5DBDA6CA
+P 5850 2850
+F 0 "C4" V 5713 2850 50  0000 C CNN
+F 1 "0.1uF" V 5622 2850 50  0000 C CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 5850 2850 50  0001 C CNN
+F 3 "http://www.samsungsem.com/kr/support/product-search/mlcc/CL10B104KB8NNNL.jsp" H 5850 2850 50  0001 C CNN
+F 4 "1276-CL10B104KB8NNNLCT-ND" H 5850 2850 50  0001 C CNN "DigiKey"
+F 5 "CL10B104KB8NNNL" H 5850 2850 50  0001 C CNN "PartNum"
+F 6 "" H 5850 2850 50  0001 C CNN "Sub?"
+	1    5850 2850
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:C_Small C2
+U 1 1 5DBDA6CB
+P 5000 3600
+F 0 "C2" V 4863 3600 50  0000 C CNN
+F 1 "0.1uF" V 4772 3600 50  0000 C CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 5000 3600 50  0001 C CNN
+F 3 "http://www.samsungsem.com/kr/support/product-search/mlcc/CL10B104KB8NNNL.jsp" H 5000 3600 50  0001 C CNN
+F 4 "1276-CL10B104KB8NNNLCT-ND" H 5000 3600 50  0001 C CNN "DigiKey"
+F 5 "CL10B104KB8NNNL" H 5000 3600 50  0001 C CNN "PartNum"
+F 6 "" H 5000 3600 50  0001 C CNN "Sub?"
+	1    5000 3600
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:R_Small_US R16
+U 1 1 5D76F90E
+P 7200 3450
+F 0 "R16" H 7268 3404 50  0000 L CNN
+F 1 "10k" H 7268 3495 50  0000 L CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 7200 3450 50  0001 C CNN
+F 3 "https://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&DocNm=1773204-1&DocType=DS&DocLang=English" H 7200 3450 50  0001 C CNN
+F 4 "CRGH0603J10K" V 7200 3450 50  0001 C CNN "PartNum"
+F 5 "A126394CT-ND" V 7200 3450 50  0001 C CNN "DigiKey"
+F 6 "" V 7200 3450 50  0001 C CNN "Sub?"
+	1    7200 3450
+	1    0    0    1   
+$EndComp
+$Comp
+L Device:C_Small C5
+U 1 1 5DBDA6C6
+P 6350 2650
+F 0 "C5" V 6579 2650 50  0000 C CNN
+F 1 "1uF" V 6488 2650 50  0000 C CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 6350 2650 50  0001 C CNN
+F 3 "https://media.digikey.com/pdf/Data%20Sheets/Samsung%20PDFs/CL10B105MO8NNWC.pdf" H 6350 2650 50  0001 C CNN
+F 4 "CL10B105MO8NNWC" V 6350 2650 50  0001 C CNN "PartNum"
+F 5 "1276-6524-1-ND" V 6350 2650 50  0001 C CNN "DigiKey"
+F 6 "" H 6350 2650 50  0001 C CNN "Sub?"
+	1    6350 2650
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:C_Small C3
+U 1 1 5DBDA6C9
+P 5850 2650
+F 0 "C3" V 6079 2650 50  0000 C CNN
+F 1 "10uF" V 5988 2650 50  0000 C CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 5850 2650 50  0001 C CNN
+F 3 "http://www.samsungsem.com/kr/support/product-search/mlcc/CL10A106MQ8NNNC.jsp" H 5850 2650 50  0001 C CNN
+F 4 "CL10A106MQ8NNNC" V 5850 2650 50  0001 C CNN "PartNum"
+F 5 "1276-1119-1-ND" V 5850 2650 50  0001 C CNN "DigiKey"
+F 6 "" H 5850 2650 50  0001 C CNN "Sub?"
+	1    5850 2650
+	0    -1   -1   0   
+$EndComp
+$Comp
+L MCU_ST_STM32L0:STM32L011F4Px U1
+U 1 1 5DBDA6C4
+P 6150 4050
+F 0 "U1" H 6525 3311 50  0000 C CNN
+F 1 "STM32L011F4Px" H 6525 3220 50  0000 C CNN
+F 2 "Package_SO:TSSOP-20_4.4x6.5mm_P0.65mm" H 5750 3350 50  0001 R CNN
+F 3 "http://www.st.com/st-web-ui/static/active/en/resource/technical/document/datasheet/DM00206508.pdf" H 6150 4050 50  0001 C CNN
+F 4 "STM32L011F4P6" H 6150 4050 50  0001 C CNN "PartNum"
+F 5 "497-17477-ND" H 6150 4050 50  0001 C CNN "DigiKey"
+	1    6150 4050
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C6
+U 1 1 5DBDA6C0
+P 6350 2850
+F 0 "C6" V 6213 2850 50  0000 C CNN
+F 1 "0.1uF" V 6122 2850 50  0000 C CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 6350 2850 50  0001 C CNN
+F 3 "http://www.samsungsem.com/kr/support/product-search/mlcc/CL10B104KB8NNNL.jsp" H 6350 2850 50  0001 C CNN
+F 4 "1276-CL10B104KB8NNNLCT-ND" H 6350 2850 50  0001 C CNN "DigiKey"
+F 5 "CL10B104KB8NNNL" H 6350 2850 50  0001 C CNN "PartNum"
+F 6 "" H 6350 2850 50  0001 C CNN "Sub?"
+	1    6350 2850
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Connector_Generic:Conn_01x10 J8
+U 1 1 5DBDA6D2
+P 2000 2800
+F 0 "J8" H 2080 2792 50  0000 L CNN
+F 1 "SWD" H 2080 2701 50  0000 L CNN
+F 2 "isoblue3:TC2050-IDC" H 2000 2800 50  0001 C CNN
+F 3 "https://www.st.com/content/ccc/resource/technical/document/application_note/fd/f4/6b/40/9a/b5/41/a2/DM00112257.pdf/files/DM00112257.pdf/jcr:content/translations/en.DM00112257.pdf" H 2000 2800 50  0001 C CNN
+	1    2000 2800
+	1    0    0    -1  
+$EndComp
+Text HLabel 5550 4250 0    50   Output ~ 0
+12_RC
+Text HLabel 4450 3950 1    50   Input ~ 0
+1V8
+Wire Wire Line
+	4650 4350 4650 4500
+$Comp
+L Device:C_Small C1
+U 1 1 5D9824C1
+P 4650 4250
+F 0 "C1" V 4513 4250 50  0000 C CNN
+F 1 "0.1uF" V 4422 4250 50  0000 C CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 4650 4250 50  0001 C CNN
+F 3 "http://www.samsungsem.com/kr/support/product-search/mlcc/CL10B104KB8NNNL.jsp" H 4650 4250 50  0001 C CNN
+F 4 "1276-CL10B104KB8NNNLCT-ND" H 4650 4250 50  0001 C CNN "DigiKey"
+F 5 "CL10B104KB8NNNL" H 4650 4250 50  0001 C CNN "PartNum"
+F 6 "" H 4650 4250 50  0001 C CNN "Sub?"
+	1    4650 4250
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	4450 4450 4450 4500
+Wire Wire Line
+	4450 3950 4450 4000
+Wire Wire Line
+	4450 4000 4450 4050
+Wire Wire Line
+	4650 4000 4450 4000
+$Comp
+L Device:R_Small_US R15
+U 1 1 5E1728D5
+P 4450 4775
+F 0 "R15" H 4518 4729 50  0000 L CNN
+F 1 "10k" H 4518 4820 50  0000 L CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 4450 4775 50  0001 C CNN
+F 3 "https://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&DocNm=1773204-1&DocType=DS&DocLang=English" H 4450 4775 50  0001 C CNN
+F 4 "CRGH0603J10K" V 4450 4775 50  0001 C CNN "PartNum"
+F 5 "A126394CT-ND" V 4450 4775 50  0001 C CNN "DigiKey"
+F 6 "" V 4450 4775 50  0001 C CNN "Sub?"
+	1    4450 4775
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	4650 4000 4650 4150
+$Comp
+L power:GND #PWR017
+U 1 1 5E164683
+P 4450 5000
+F 0 "#PWR017" H 4450 4750 50  0001 C CNN
+F 1 "GND" H 4455 4827 50  0000 C CNN
+F 2 "" H 4450 5000 50  0001 C CNN
+F 3 "" H 4450 5000 50  0001 C CNN
+	1    4450 5000
+	1    0    0    -1  
+$EndComp
+Text Label 5275 4550 0    50   ~ 0
+PWR_BTN
+NoConn ~ 5650 4650
+Wire Wire Line
+	4450 5000 4450 4875
+Wire Wire Line
+	4650 4500 4450 4500
+Wire Wire Line
+	4450 4500 4450 4550
+Connection ~ 4450 4500
+Wire Wire Line
+	5650 4550 4450 4550
+Connection ~ 4450 4550
+Wire Wire Line
+	4450 4550 4450 4675
+Text Notes 8400 5400 0    50   Italic 0
+Scale: 0V - 33V    ->    0V -> 1.793V
+Wire Wire Line
+	9600 4050 9850 4050
+Wire Wire Line
+	8600 4150 8750 4150
+Wire Wire Line
+	9850 4050 9850 4200
+Text HLabel 9850 3600 1    50   Input ~ 0
+VIN
+Wire Wire Line
+	9400 4050 9600 4050
+Text Notes 8550 3350 0    75   ~ 15
+Vin monitor
+Wire Wire Line
+	8750 4750 8750 4150
+Wire Wire Line
+	8450 4250 8450 4150
+Text HLabel 9200 3600 1    50   Input ~ 0
+1V8
+Wire Wire Line
+	9500 4250 9500 4750
+Wire Wire Line
+	8450 4150 8600 4150
+Wire Wire Line
+	9500 4750 8750 4750
+Wire Wire Line
+	9850 4450 9850 4400
+$Comp
+L Device:R_Small_US R18
+U 1 1 5D697B9E
+P 9150 4850
+F 0 "R18" V 9263 4850 50  0000 C CNN
+F 1 "0" V 9354 4850 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 9150 4850 50  0001 C CNN
+F 3 "" H 9150 4850 50  0001 C CNN
+F 4 "DNP" V 9150 4850 50  0001 C CNN "PartNum"
+F 5 "DNP" V 9150 4850 50  0001 C CNN "DigiKey"
+F 6 "" V 9150 4850 50  0001 C CNN "Sub?"
+F 7 "DNP" V 9445 4850 50  0000 C CNN "DNP"
+	1    9150 4850
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	9400 4250 9500 4250
+Wire Wire Line
+	9200 3700 9200 3850
+Wire Wire Line
+	9600 4850 9250 4850
+Wire Wire Line
+	8600 4850 8600 4150
+Wire Wire Line
+	9850 3600 9850 3700
+Wire Wire Line
+	9600 4050 9600 4850
+$Comp
+L Device:C_Small C8
+U 1 1 5D697B9F
+P 8950 3700
+F 0 "C8" V 8813 3700 50  0000 C CNN
+F 1 "0.1uF" V 8722 3700 50  0000 C CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 8950 3700 50  0001 C CNN
+F 3 "http://www.samsungsem.com/kr/support/product-search/mlcc/CL10B104KB8NNNL.jsp" H 8950 3700 50  0001 C CNN
+F 4 "1276-CL10B104KB8NNNLCT-ND" H 8950 3700 50  0001 C CNN "DigiKey"
+F 5 "CL10B104KB8NNNL" H 8950 3700 50  0001 C CNN "PartNum"
+F 6 "" H 8950 3700 50  0001 C CNN "Sub?"
+	1    8950 3700
+	0    1    1    0   
+$EndComp
+$Comp
+L power:GND #PWR024
+U 1 1 5D697BA0
+P 8800 3750
+F 0 "#PWR024" H 8800 3500 50  0001 C CNN
+F 1 "GND" H 8805 3577 50  0000 C CNN
+F 2 "" H 8800 3750 50  0001 C CNN
+F 3 "" H 8800 3750 50  0001 C CNN
+	1    8800 3750
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R_Small_US R19
+U 1 1 5D697BA1
+P 9850 3800
+F 0 "R19" H 9918 3754 50  0000 L CNN
+F 1 "470k" H 9918 3845 50  0000 L CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 9850 3800 50  0001 C CNN
+F 3 "https://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&DocNm=9-1773463-9&DocType=DS&DocLang=English" H 9850 3800 50  0001 C CNN
+F 4 "CRGP0603F470K" V 9850 3800 50  0001 C CNN "PartNum"
+F 5 "A130448CT-ND" V 9850 3800 50  0001 C CNN "DigiKey"
+F 6 "" V 9850 3800 50  0001 C CNN "Sub?"
+	1    9850 3800
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	6550 4150 8450 4150
+$Comp
+L Device:R_Small_US R20
+U 1 1 5D697BA2
+P 9850 4300
+F 0 "R20" H 9918 4254 50  0000 L CNN
+F 1 "27k" H 9918 4345 50  0000 L CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 9850 4300 50  0001 C CNN
+F 3 "https://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&DocNm=9-1773463-9&DocType=DS&DocLang=English" H 9850 4300 50  0001 C CNN
+F 4 "CRGP0603F27K" V 9850 4300 50  0001 C CNN "PartNum"
+F 5 "A130433CT-ND" V 9850 4300 50  0001 C CNN "DigiKey"
+F 6 "" V 9850 4300 50  0001 C CNN "Sub?"
+	1    9850 4300
+	-1   0    0    1   
+$EndComp
+$Comp
+L power:GND #PWR026
+U 1 1 5D697BA3
+P 9850 4450
+F 0 "#PWR026" H 9850 4200 50  0001 C CNN
+F 1 "GND" H 9855 4277 50  0000 C CNN
+F 2 "" H 9850 4450 50  0001 C CNN
+F 3 "" H 9850 4450 50  0001 C CNN
+	1    9850 4450
+	1    0    0    -1  
+$EndComp
+$Comp
+L isoblue3:TLV379 U2
+U 1 1 5D697BA4
+P 9200 4150
+F 0 "U2" H 9450 3869 50  0000 C CNN
+F 1 "TLV379" H 9450 3960 50  0000 C CNN
+F 2 "Package_TO_SOT_SMD:SOT-23-5_HandSoldering" H 9200 4150 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/tlv379.pdf" H 9200 4150 50  0001 C CNN
+F 4 "TLV379IDBVT" H 9300 3669 50  0001 C CNN "PartNum"
+F 5 "296-44229-1-ND" H 9300 3760 50  0001 C CNN "DigiKey"
+	1    9200 4150
+	-1   0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C7
+U 1 1 5D697BA5
+P 8450 4350
+F 0 "C7" H 8358 4396 50  0000 R CNN
+F 1 "0.1uF" H 8358 4305 50  0000 R CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 8450 4350 50  0001 C CNN
+F 3 "http://www.samsungsem.com/kr/support/product-search/mlcc/CL10B104KB8NNNL.jsp" H 8450 4350 50  0001 C CNN
+F 4 "1276-CL10B104KB8NNNLCT-ND" H 8450 4350 50  0001 C CNN "DigiKey"
+F 5 "CL10B104KB8NNNL" H 8450 4350 50  0001 C CNN "PartNum"
+F 6 "" H 8450 4350 50  0001 C CNN "Sub?"
+	1    8450 4350
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR022
+U 1 1 5D697BA6
+P 8450 4500
+F 0 "#PWR022" H 8450 4250 50  0001 C CNN
+F 1 "GND" H 8455 4327 50  0000 C CNN
+F 2 "" H 8450 4500 50  0001 C CNN
+F 3 "" H 8450 4500 50  0001 C CNN
+	1    8450 4500
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR025
+U 1 1 5D697BA7
+P 9200 4450
+F 0 "#PWR025" H 9200 4200 50  0001 C CNN
+F 1 "GND" H 9205 4277 50  0000 C CNN
+F 2 "" H 9200 4450 50  0001 C CNN
+F 3 "" H 9200 4450 50  0001 C CNN
+	1    9200 4450
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8750 4150 8800 4150
+Connection ~ 8750 4150
+Wire Wire Line
+	9050 3700 9200 3700
+Wire Wire Line
+	8450 4500 8450 4450
+Wire Wire Line
+	8800 3700 8850 3700
+Wire Wire Line
+	9850 3900 9850 4050
+Wire Wire Line
+	9050 4850 8600 4850
+Wire Wire Line
+	8800 3750 8800 3700
+Connection ~ 9600 4050
+Wire Wire Line
+	9200 3700 9200 3600
+Connection ~ 8600 4150
+Connection ~ 9850 4050
+Connection ~ 9200 3700
+Connection ~ 8450 4150
+Text HLabel 5550 4350 0    50   Output ~ 0
+24_RC
+Wire Wire Line
+	5550 4350 5650 4350
+NoConn ~ 1800 2900
+NoConn ~ 1800 3000
+NoConn ~ 1800 3100
+$Comp
+L Switch:SW_Push SW1
+U 1 1 5D98A630
+P 4450 4250
+F 0 "SW1" H 4450 4535 50  0000 C CNN
+F 1 "PWR" H 4450 4444 50  0000 C CNN
+F 2 "Button_Switch_SMD:SW_SPST_TL3342" H 4450 4450 50  0001 C CNN
+F 3 "http://spec_sheets.e-switch.com/specs/P010590.pdf" H 4450 4450 50  0001 C CNN
+F 4 "http://spec_sheets.e-switch.com/specs/P010632.pdf" H 4450 4250 50  0001 C CNN "Datasheet2"
+F 5 "TL3342F260QG" H 4450 4250 50  0001 C CNN "PartNum"
+F 6 "EG5470CT-ND" H 4450 4250 50  0001 C CNN "DigiKey"
+F 7 "TL3342F160QG/TR" H 4450 4250 50  0001 C CNN "PartNum2"
+F 8 "EG2531CT-ND" H 4450 4250 50  0001 C CNN "DigiKey2"
+	1    4450 4250
+	0    -1   -1   0   
+$EndComp
+Connection ~ 4700 3600
+Wire Wire Line
+	4700 3400 4700 3600
+Wire Wire Line
+	4800 3400 4700 3400
+$Comp
+L Switch:SW_Push SW2
+U 1 1 5D98EC24
+P 5000 3400
+F 0 "SW2" H 5000 3685 50  0000 C CNN
+F 1 "RESET" H 5000 3594 50  0000 C CNN
+F 2 "Button_Switch_SMD:SW_SPST_TL3342" H 5000 3600 50  0001 C CNN
+F 3 "http://spec_sheets.e-switch.com/specs/P010590.pdf" H 5000 3600 50  0001 C CNN
+F 4 "http://spec_sheets.e-switch.com/specs/P010632.pdf" H 5000 3400 50  0001 C CNN "Datasheet2"
+F 5 "TL3342F260QG" H 5000 3400 50  0001 C CNN "PartNum"
+F 6 "EG5470CT-ND" H 5000 3400 50  0001 C CNN "DigiKey"
+F 7 "TL3342F160QG/TR" H 5000 3400 50  0001 C CNN "PartNum2"
+F 8 "EG2531CT-ND" H 5000 3400 50  0001 C CNN "DigiKey2"
+	1    5000 3400
+	1    0    0    -1  
+$EndComp
+Text Label 5600 3550 2    50   ~ 0
+NRST
+$EndSCHEMATC

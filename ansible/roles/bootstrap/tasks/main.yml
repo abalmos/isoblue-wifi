@@ -1,0 +1,167 @@
+- name: ensure root can access forward ssh-agent for bootstrapping tasks
+  become: yes
+  block:
+  - name: change hostname to {{ inventory_hostname }}
+    hostname:
+      name: "{{ inventory_hostname }}"
+    become: true
+
+  - name: add {{ inventory_hostname }} to /etc/hosts
+    lineinfile:
+      dest: /etc/hosts
+      regexp: '^127\.0\.0\.1.+localhost.*'
+      line: '127.0.0.1 {{ inventory_hostname }} localhost'
+      state: present
+    become: true
+
+  - name: remove debian default /etc/hosts entry for 127.0.1.1
+    lineinfile:
+      dest: /etc/hosts
+      regexp: '^127\.0\.1\.1'
+      state: absent
+    become: true
+
+  - name: ensure id is correct
+    copy:
+      dest: /etc/id
+      content: "{{ inventory_hostname }}"
+      owner: root
+      group: root
+      mode: '644'
+
+  - name: ensure root can access forward ssh-agent for bootstrapping tasks
+    copy:
+      dest: /etc/sudoers.d/
+      src: sudoers.d/01-allow-root-to-use-forwarded-auth-sock
+      owner: root
+      group: root
+      mode: '0440'
+
+  - name: ensure base operating system is up to date
+    apt:
+      update_cache: yes
+      upgrade: "yes"
+      autoclean: yes
+      autoremove: yes
+
+  - name: ensure {{ deploy_group }} group exists
+    group:
+      name: "{{ deploy_group }}"
+      state: present
+
+  - name: ensure {{ deploy_user }} user is acceptable for ansible
+    user:
+      name: "{{ deploy_user }}"
+      group: "{{ deploy_group }}"
+      password: "{{ ansible_become_pass | password_hash('sha512', 65534 | random(seed=inventory_hostname) | string) }}"
+      comment: Ansible control user
+      groups: sudo
+      shell: /bin/bash
+      generate_ssh_key: yes
+      ssh_key_type: ed25519
+      ssh_key_file: .ssh/id_ed25519
+      state: present
+
+  - name: ensure an ed25519 SSH host key is present
+    command: ssh-keygen -q -t ed25519 -f /etc/ssh/ssh_host_ed25519_key -C "{{ inventory_hostname }} ed25519 host key" -N ""
+    args:
+      creates: /etc/ssh/ssh_host_ed25519_key
+    notify: restart sshd
+
+  - name: ensue unused stock SSH host keys are removed
+    file:
+      state: absent
+      path: "{{ item }}"
+    loop:
+      - /etc/ssh/ssh_host_ecdsa_key
+      - /etc/ssh/ssh_host_ecdsa_key.pub
+      - /etc/ssh/ssh_host_rsa_key
+      - /etc/ssh/ssh_host_rsa_key.pub
+    notify: restart sshd
+
+  - name: ensure small Diffie-Hellman moduli are removed (SSH hardening)
+    shell: awk '$5 >= 3071' moduli > moduli.safe && mv moduli.safe moduli
+    args:
+      chdir: /etc/ssh/
+      creates:
+      removes:
+    notify: restart sshd
+
+  - name: ensure sshd is configured
+    copy:
+      dest: /etc/ssh/
+      src: ssh/sshd_config
+      owner: root
+      group: root
+      mode: '0644'
+    notify: restart sshd
+
+  - name: ensure node has a copy of the fleet CA public key
+    copy:
+      dest: /etc/ssh/ca.pub
+      src: keyfiles/ca.pub
+      mode: '0644'
+
+  - name: ensure node host key has certificate signed by fleet CA
+    command: ssh-keygen -Us /etc/ssh/ca.pub -I "{{ inventory_hostname }} host key" -h /etc/ssh/ssh_host_ed25519_key.pub
+    args:
+      creates: /etc/ssh/ssh_host_ed25519_key-cert.pub
+    notify: restart sshd
+
+  - name: ensure {{ deploy_user }} user authorized fleet CA for login
+    template:
+      dest: ~/.ssh/authorized_keys
+      src: ssh/authorized_keys.j2
+    become: no
+
+  - name: ensure port foward service is avaiable
+    template:
+      dest: /etc/systemd/system/ssh-tunnel@.service
+      src: services/ssh-tunnel@.service.j2
+      owner: root
+      group: root
+      mode: '0644'
+
+  - name: ensure {{ deploy_user }} user key has certificate signed for tunnel access to {{ bastion_addr }}
+    command: |
+      ssh-keygen -Us /etc/ssh/ca.pub
+      -I "{{ inventory_hostname }} tunnel user key"
+      -n tunnel
+      -O clear
+      -O permit-port-forwarding
+      -O force-command="/usr/sbin/nologin"
+      ~/.ssh/id_ed25519.pub
+    args:
+      creates: /home/{{ deploy_user }}/.ssh/id_ed25519-cert.pub
+    become: no
+
+  - name: ensure {{ deploy_user }} user known_hosts trusts the fleet CA
+    template:
+      dest: ~/.ssh/known_hosts
+      src: ssh/known_hosts.j2
+    become: no
+
+  - name: ensure port forwarding to bastion host is configuration
+    template:
+      dest: /etc/default/ssh-tunnel@{{ bastion_addr }}
+      src: default/ssh-tunnel.j2
+      owner: root
+      group: root
+      mode: '0644'
+
+  - name: ensure port forwarding to bastion host is enabled and running
+    systemd:
+      name: ssh-tunnel@{{ bastion_addr }}
+      daemon_reload: true
+      enabled: yes
+      scope: system
+      state: restarted
+
+  - name: ensure grub timeout is disabled (faster boot)
+    copy:
+      dest: /etc/default/grub
+      src: files/default/grub
+      owner: root
+      group: root
+      mode: '0644'
+    notify: rebuild grub

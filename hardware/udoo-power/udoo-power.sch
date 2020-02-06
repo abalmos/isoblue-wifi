@@ -1,0 +1,377 @@
+EESchema Schematic File Version 5
+LIBS:udoo-power-cache
+EELAYER 30 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 4
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+Comment5 ""
+Comment6 ""
+Comment7 ""
+Comment8 ""
+Comment9 ""
+$EndDescr
+Wire Wire Line
+	5750 3850 5750 3950
+Wire Wire Line
+	5750 3950 5950 3950
+$Comp
+L power:+1V8 #PWR03
+U 1 1 5E369E42
+P 5750 3850
+F 0 "#PWR03" H 5750 3700 50  0001 C CNN
+F 1 "+1V8" H 5765 4023 50  0000 C CNN
+F 2 "" H 5750 3850 50  0001 C CNN
+F 3 "" H 5750 3850 50  0001 C CNN
+	1    5750 3850
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+12V #PWR01
+U 1 1 5E36BEB0
+P 3250 3900
+F 0 "#PWR01" H 3250 3750 50  0001 C CNN
+F 1 "+12V" H 3265 4073 50  0000 C CNN
+F 2 "" H 3250 3900 50  0001 C CNN
+F 3 "" H 3250 3900 50  0001 C CNN
+	1    3250 3900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3450 4000 3250 4000
+Wire Wire Line
+	3250 4000 3250 3900
+Wire Wire Line
+	4550 4850 5950 4850
+Wire Wire Line
+	4550 4950 5950 4950
+Wire Wire Line
+	4550 5200 5950 5200
+Wire Wire Line
+	4550 5400 5950 5400
+Wire Wire Line
+	7550 4200 7050 4200
+Wire Wire Line
+	7450 2750 7450 4100
+Wire Wire Line
+	7450 4100 7050 4100
+$Sheet
+S 3450 3850 1100 2350
+U 5DD13825
+F0 "UDOO (U)" 50
+F1 "udoo.sch" 50
+F2 "12V" I L 3450 4000 50 
+F3 "RUN" O R 4550 5200 50 
+F4 "PC_CTRL_SCL" T R 4550 4950 50 
+F5 "PC_CTRL_SDA" T R 4550 4850 50 
+F6 "PC_INT" I R 4550 5400 50 
+$EndSheet
+$Sheet
+S 5950 3850 1100 1850
+U 5D750B47
+F0 "Power controller (PC)" 50
+F1 "pwr-ctl.sch" 50
+F2 "1V8" I L 5950 3950 50 
+F3 "CTRL_SDA" T L 5950 4850 50 
+F4 "U_RUN" I L 5950 5200 50 
+F5 "R_FLAG" B R 7050 4200 50 
+F6 "VIN" I L 5950 4100 50 
+F7 "CTRL_SCL" T L 5950 4950 50 
+F8 "INT" O L 5950 5400 50 
+F9 "12_RC" O R 7050 4100 50 
+F10 "24_RC" O R 7050 4000 50 
+$EndSheet
+$Comp
+L Connector_Generic:Conn_01x02 J1
+U 1 1 5D795ABE
+P 5200 1100
+F 0 "J1" H 5118 1317 50  0000 C CNN
+F 1 "Vin" H 5118 1226 50  0000 C CNN
+F 2 "TerminalBlock_Phoenix:TerminalBlock_Phoenix_PT-1,5-2-5.0-H_1x02_P5.00mm_Horizontal" H 5200 1100 50  0001 C CNN
+F 3 "https://media.digikey.com/pdf/Data%20Sheets/Phoenix%20Contact%20PDFs/1935161.pdf" H 5200 1100 50  0001 C CNN
+F 4 "1935161" H 5200 1100 50  0001 C CNN "PartNum"
+F 5 "277-1667-ND" H 5200 1100 50  0001 C CNN "DigiKey"
+	1    5200 1100
+	-1   0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR02
+U 1 1 5DB15F54
+P 5450 1300
+F 0 "#PWR02" H 5450 1050 50  0001 C CNN
+F 1 "GND" H 5455 1127 50  0000 C CNN
+F 2 "" H 5450 1300 50  0001 C CNN
+F 3 "" H 5450 1300 50  0001 C CNN
+	1    5450 1300
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7200 2250 7200 2350
+Wire Wire Line
+	7200 2350 7050 2350
+Wire Wire Line
+	7050 2650 7550 2650
+Wire Wire Line
+	5400 1200 5450 1200
+$Comp
+L power:+1V8 #PWR06
+U 1 1 5E34E4FE
+P 7200 2250
+F 0 "#PWR06" H 7200 2100 50  0001 C CNN
+F 1 "+1V8" H 7215 2423 50  0000 C CNN
+F 2 "" H 7200 2250 50  0001 C CNN
+F 3 "" H 7200 2250 50  0001 C CNN
+	1    7200 2250
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5450 1300 5450 1200
+Wire Wire Line
+	7050 2750 7450 2750
+Wire Wire Line
+	5400 1100 5600 1100
+Wire Wire Line
+	5600 4100 5600 1100
+Wire Wire Line
+	5600 4100 5950 4100
+Connection ~ 5600 1100
+Wire Wire Line
+	5600 1100 5700 1100
+$Comp
+L power:+12V #PWR04
+U 1 1 5D6CBEC8
+P 7200 1000
+F 0 "#PWR04" H 7200 850 50  0001 C CNN
+F 1 "+12V" H 7215 1173 50  0000 C CNN
+F 2 "" H 7200 1000 50  0001 C CNN
+F 3 "" H 7200 1000 50  0001 C CNN
+	1    7200 1000
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7550 2650 7550 4200
+Wire Wire Line
+	7050 1100 7200 1100
+Wire Wire Line
+	7200 1100 7200 1000
+$Comp
+L power:GND #PWR05
+U 1 1 5D6CE5EA
+P 7200 1250
+F 0 "#PWR05" H 7200 1000 50  0001 C CNN
+F 1 "GND" H 7205 1077 50  0000 C CNN
+F 2 "" H 7200 1250 50  0001 C CNN
+F 3 "" H 7200 1250 50  0001 C CNN
+	1    7200 1250
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7200 1200 7200 1250
+Wire Wire Line
+	7050 4000 7350 4000
+Wire Wire Line
+	7350 4000 7350 2850
+Wire Wire Line
+	7350 2850 7050 2850
+$Comp
+L Connector_Generic:Conn_01x02 J3
+U 1 1 5D70E2AB
+P 8150 1100
+F 0 "J3" H 8230 1092 50  0000 L CNN
+F 1 "12V" H 8230 1001 50  0000 L CNN
+F 2 "TerminalBlock_Phoenix:TerminalBlock_Phoenix_PT-1,5-2-5.0-H_1x02_P5.00mm_Horizontal" H 8150 1100 50  0001 C CNN
+F 3 "https://media.digikey.com/pdf/Data%20Sheets/Phoenix%20Contact%20PDFs/1935161.pdf" H 8150 1100 50  0001 C CNN
+F 4 "1935161" H 8150 1100 50  0001 C CNN "PartNum"
+F 5 "277-1667-ND" H 8150 1100 50  0001 C CNN "DigiKey"
+	1    8150 1100
+	1    0    0    -1  
+$EndComp
+Connection ~ 7200 1200
+Connection ~ 7200 1100
+Wire Wire Line
+	7950 1800 7750 1800
+Wire Wire Line
+	7950 1900 7650 1900
+Wire Wire Line
+	7950 1700 7850 1700
+$Comp
+L Connector_Generic:Conn_01x03 J2
+U 1 1 5D97291C
+P 8150 1800
+F 0 "J2" H 8230 1842 50  0000 L CNN
+F 1 "48V_ISO" H 8230 1751 50  0000 L CNN
+F 2 "TerminalBlock_Phoenix:TerminalBlock_Phoenix_PT-1,5-3-5.0-H_1x03_P5.00mm_Horizontal" H 8150 1800 50  0001 C CNN
+F 3 "https://media.digikey.com/pdf/Data%20Sheets/Phoenix%20Contact%20PDFs/1935174.pdf" H 8150 1800 50  0001 C CNN
+F 4 "1935174" H 8150 1800 50  0001 C CNN "PartNum"
+F 5 "277-1578-ND" H 8150 1800 50  0001 C CNN "DigiKey"
+	1    8150 1800
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector_Generic:Conn_01x03 J11
+U 1 1 5D6FE3F0
+P 8150 2200
+F 0 "J11" H 8230 2242 50  0000 L CNN
+F 1 "48V_ISO_B2B" H 8230 2151 50  0000 L CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical" H 8150 2200 50  0001 C CNN
+F 3 "https://www.molex.com/pdm_docs/sd/022032031_sd.pdf" H 8150 2200 50  0001 C CNN
+F 4 "22-03-2031" H 8150 2200 50  0001 C CNN "PartNum"
+F 5 "WM4001-ND" H 8150 2200 50  0001 C CNN "DigiKey"
+	1    8150 2200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7950 2100 7850 2100
+Wire Wire Line
+	7850 2100 7850 1700
+Connection ~ 7850 1700
+Wire Wire Line
+	7850 1700 7050 1700
+Wire Wire Line
+	7950 2200 7750 2200
+Wire Wire Line
+	7750 2200 7750 1800
+Connection ~ 7750 1800
+Wire Wire Line
+	7750 1800 7050 1800
+Wire Wire Line
+	7950 2300 7650 2300
+Wire Wire Line
+	7650 2300 7650 1900
+Connection ~ 7650 1900
+Wire Wire Line
+	7650 1900 7050 1900
+Wire Wire Line
+	7050 1200 7200 1200
+$Sheet
+S 5700 900  1350 2100
+U 5D93ECC9
+F0 "Regulators (R)" 50
+F1 "regulators.sch" 50
+F2 "VIN" I L 5700 1100 50 
+F3 "FLAG" O R 7050 2650 50 
+F4 "1V8" O R 7050 2350 50 
+F5 "12_RC" I R 7050 2750 50 
+F6 "12V" O R 7050 1100 50 
+F7 "+24V" O R 7050 1700 50 
+F8 "-24V" O R 7050 1900 50 
+F9 "24_RC" I R 7050 2850 50 
+F10 "24V_COM" O R 7050 1800 50 
+F11 "12V_COM" O R 7050 1200 50 
+$EndSheet
+Wire Wire Line
+	7200 1200 7950 1200
+Wire Wire Line
+	7200 1100 7950 1100
+$Comp
+L logos:WHIN_LOGO G3
+U 1 1 5D717F09
+P 10100 5950
+F 0 "G3" H 10100 5800 50  0001 C CNN
+F 1 "WHIN_LOGO" H 10100 6150 50  0001 C CNN
+F 2 "logos:WHIN_LOGO" H 10100 5950 50  0001 C CNN
+F 3 "" H 10100 5950 50  0001 C CNN
+	1    10100 5950
+	1    0    0    -1  
+$EndComp
+$Comp
+L logos:PURDUE_LOGO G2
+U 1 1 5D71B420
+P 9250 5900
+F 0 "G2" H 9250 5700 50  0001 C CNN
+F 1 "PURDUE_LOGO" H 9250 6050 50  0001 C CNN
+F 2 "logos:PURDUE_LOGO" H 9250 5900 50  0001 C CNN
+F 3 "" H 9250 5900 50  0001 C CNN
+	1    9250 5900
+	1    0    0    -1  
+$EndComp
+$Comp
+L logos:OATS_LOGO G1
+U 1 1 5D71CA2A
+P 9700 5500
+F 0 "G1" H 9700 5250 50  0001 C CNN
+F 1 "OATS_LOGO" H 9700 5800 50  0001 C CNN
+F 2 "logos:OATS_LOGO" H 9700 5500 50  0001 C CNN
+F 3 "" H 9700 5500 50  0001 C CNN
+	1    9700 5500
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole_Pad H2
+U 1 1 5D71F2E1
+P 2150 1550
+F 0 "H2" H 2250 1553 50  0000 L CNN
+F 1 "MountingHole_Pad" H 2250 1508 50  0001 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3_Pad_Via" H 2150 1550 50  0001 C CNN
+F 3 "~" H 2150 1550 50  0001 C CNN
+	1    2150 1550
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole_Pad H1
+U 1 1 5D71E184
+P 1800 1550
+F 0 "H1" H 1900 1553 50  0000 L CNN
+F 1 "MountingHole_Pad" H 1900 1508 50  0001 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3_Pad_Via" H 1800 1550 50  0001 C CNN
+F 3 "~" H 1800 1550 50  0001 C CNN
+	1    1800 1550
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0103
+U 1 1 5D721041
+P 1800 1750
+F 0 "#PWR0103" H 1800 1500 50  0001 C CNN
+F 1 "GND" H 1805 1577 50  0000 C CNN
+F 2 "" H 1800 1750 50  0001 C CNN
+F 3 "" H 1800 1750 50  0001 C CNN
+	1    1800 1750
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0104
+U 1 1 5D721438
+P 2150 1750
+F 0 "#PWR0104" H 2150 1500 50  0001 C CNN
+F 1 "GND" H 2155 1577 50  0000 C CNN
+F 2 "" H 2150 1750 50  0001 C CNN
+F 3 "" H 2150 1750 50  0001 C CNN
+	1    2150 1750
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2150 1750 2150 1650
+Wire Wire Line
+	1800 1750 1800 1650
+$Comp
+L Graphic:Logo_Open_Hardware_Small LOGO1
+U 1 1 5D766A8E
+P 3300 7400
+F 0 "LOGO1" H 3300 7675 50  0001 C CNN
+F 1 "Logo_Open_Hardware_Small" H 3300 7175 50  0001 C CNN
+F 2 "Symbol:OSHW-Logo_7.5x8mm_SilkScreen" H 3300 7400 50  0001 C CNN
+F 3 "~" H 3300 7400 50  0001 C CNN
+	1    3300 7400
+	1    0    0    -1  
+$EndComp
+$Comp
+L logos:KICAD_LOGO G4
+U 1 1 5D7960D9
+P 1750 7100
+F 0 "G4" H 1750 6579 50  0001 C CNN
+F 1 "KICAD_LOGO" H 1750 7621 50  0001 C CNN
+F 2 "Symbol:KiCad-Logo2_6mm_SilkScreen" H 1750 7100 50  0001 C CNN
+F 3 "" H 1750 7100 50  0001 C CNN
+	1    1750 7100
+	1    0    0    -1  
+$EndComp
+$EndSCHEMATC
